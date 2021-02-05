@@ -1,11 +1,12 @@
 name: test this
 
+environment: test
+
 on:
   push:
     branches:
       - main
 
-environment: test
 jobs:
   build:
 
