@@ -1,0 +1,21 @@
+name: deploy lambda
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8]
+
+    steps:
+  - shell: bash
+    env:
+      SUPER_SECRET: ${{ secrets.POLLER_AWS_REGION }}
+    run: |
+      echo "$SUPER_SECRET"
