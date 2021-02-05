@@ -1,45 +1,42 @@
-# name: deploy lambda
+name: deploy lambda
 
-# on:
-#   push:
-#     branches:
-#       - main
+on:
+  push:
+    branches:
+      - main
 
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-#     strategy:
-#       matrix:
-#         python-version: [3.8]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8]
 
-#     steps:
-#     - name: checkout
-#       uses: actions/checkout@v2
-#     - name: Set up python ${{ matrix.python-version }}
-#       uses: actions/setup-python@v2
-#       with:
-#         python-version: ${{ matrix.python-version }}
-#     - name: Install dependencies
-#       run: |
-#         python -m pip install --upgrade pip
-#         pip install flake8 pytest
-#         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-#     - name: Run tests
-#       run: |
-#         python -m unittest tests/hellotest.py
-#     - name: Configure AWS Credentials
-#       uses: aws-actions/configure-aws-credentials@v1
-#       env:
-#         REGION: ${{ secrets.POLLER_AWS_REGION }}
-#         ACCESSKEY:
-#       with:
-#         aws-access-key-id: ${{ secrets.POLLER_AWS_ACCESS_KEY_ID }}
-#         aws-secret-access-key: ${{ secrets.POLLER_AWS_SECRET_ACCESS_KEY }}
-#         aws-region: "$REGION"
-#     - name: Docker Build
-#       run: |
-#         docker build -t ${{ secrets.POLLER_AWS_ACCOUNT_NUMBER }}.dkr.${{ secrets.POLLER_AWS_REGION }}.amazonaws.com/hello-lambda:latest .
-#     - name: Push
-#       run: |
-#         docker push ${{ secrets.POLLER_AWS_ACCOUNT_NUMBER }}.dkr.${{ secrets.POLLER_AWS_REGION }}.amazonaws.com/hello-lambda:latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+    - name: Set up python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 pytest
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Run tests
+      run: |
+        python -m unittest tests/hellotest.py
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.POLLER_AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.POLLER_AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.POLLER_AWS_REGION }}
+    - name: Docker Build
+      run: |
+        docker build -t ${{ secrets.POLLER_AWS_ACCOUNT_NUMBER }}.dkr.${{ secrets.POLLER_AWS_REGION }}.amazonaws.com/hello-lambda:latest .
+    - name: Push
+      run: |
+        docker push ${{ secrets.POLLER_AWS_ACCOUNT_NUMBER }}.dkr.${{ secrets.POLLER_AWS_REGION }}.amazonaws.com/hello-lambda:latest
       
