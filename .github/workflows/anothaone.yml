@@ -33,7 +33,7 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.POLLER_AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.POLLER_AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ secrets.POLLER_AWS_REGION }}
+        aws-region: us-west-2
     - name: Docker Build
       run: |
         docker build -t ${{ secrets.POLLER_AWS_ACCOUNT_NUMBER }}.dkr.${{ secrets.POLLER_AWS_REGION }}.amazonaws.com/hello-lambda:latest .
