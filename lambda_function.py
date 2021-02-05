@@ -24,8 +24,8 @@ botoSNSClient = boto3.client(
 
 # botoSNSClient = boto3.client(
 #     'sns',
-#     aws_access_key_id='AKIAYRXPGY6UHH5H6X57',
-#     aws_secret_access_key='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',
+#     aws_access_key_id='',
+#     aws_secret_access_key='',
 #     config=my_config
 # )
 
