@@ -36,6 +36,7 @@ jobs:
     - name: Docker Build
       run: |
       docker build -t ${{ secrets.POLLER_AWS_ACCOUNT_NUMBER }}.dkr.${{ secrets.POLLER_AWS_REGION }}.amazonaws.com/hello-lambda:latest .
-    - name: Docker Push to ECR
+    - name: Push
       run: |
       docker push ${{ secrets.POLLER_AWS_ACCOUNT_NUMBER }}.dkr.${{ secrets.POLLER_AWS_REGION }}.amazonaws.com/hello-lambda:latest
+      
