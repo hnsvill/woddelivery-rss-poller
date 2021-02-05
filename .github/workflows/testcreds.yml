@@ -1,7 +1,5 @@
 name: test this
 
-environment: test
-
 on:
   push:
     branches:
