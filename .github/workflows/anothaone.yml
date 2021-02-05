@@ -35,8 +35,8 @@ jobs:
         aws-secret-access-key: ${{ secrets.POLLER_AWS_SECRET_ACCESS_KEY }}
     - name: Docker Build
       run: |
-      docker build -t ${{ secrets.POLLER_AWS_ACCOUNT_NUMBER }}.dkr.${{ secrets.POLLER_AWS_REGION }}.amazonaws.com/hello-lambda:latest .
+        docker build -t ${{ secrets.POLLER_AWS_ACCOUNT_NUMBER }}.dkr.${{ secrets.POLLER_AWS_REGION }}.amazonaws.com/hello-lambda:latest .
     - name: Push
       run: |
-      docker push ${{ secrets.POLLER_AWS_ACCOUNT_NUMBER }}.dkr.${{ secrets.POLLER_AWS_REGION }}.amazonaws.com/hello-lambda:latest
+        docker push ${{ secrets.POLLER_AWS_ACCOUNT_NUMBER }}.dkr.${{ secrets.POLLER_AWS_REGION }}.amazonaws.com/hello-lambda:latest
       
