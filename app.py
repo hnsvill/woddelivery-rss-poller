@@ -73,11 +73,11 @@ def publishToSNS(messageBody):
 #         WaitTimeSeconds=20
 #     )
 
-def lambda_handler(event=None, context=None):
+def handler(event=None, context=None):
     latestEntry = constructedMessageMostRecentEntry()
     if publishedWithinNHours(latestEntry['publishedTimeEpoch'], 48):
         print(publishToSNS(latestEntry))
     return 'Hello from AWS Lambda on: ' + sys.version + '!'
 
 if __name__ == "__main__":
-    lambda_handler()
+    handler()
