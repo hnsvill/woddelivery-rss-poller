@@ -6,30 +6,6 @@ from botocore.config import Config
 import os
 
 
-my_config = Config(
-    region_name = os.environ.get('AWS_REGION')
-)
-
-botoSNSClient = boto3.client(
-    'sns',
-    aws_access_key_id=os.environ.get('AWS_ACCESS_KEY_ID'),
-    aws_secret_access_key=os.environ.get('AWS_SECRET_ACCESS_KEY'),
-    config=my_config
-)
-
-
-# my_config = Config(
-#     region_name = 'us-west-2'
-# )
-
-# botoSNSClient = boto3.client(
-#     'sns',
-#     aws_access_key_id='',
-#     aws_secret_access_key='',
-#     config=my_config
-# )
-
-
 # Retrieve details of the most recent entry to the RSS feed
 def constructedMessageMostRecentEntry():
     feedAddress = "https://www.crossfitswbeaverton.com/feed/"
@@ -52,7 +28,7 @@ def publishedWithinNHours(publishedTimeInEpochSeconds, hoursAgoToCheckFor):
     return ((time.time() - publishedTimeInEpochSeconds)/60)/60 <= hoursAgoToCheckFor
 
 def publishToSNS(messageBody):
-    return botoSNSClient.publish(
+    return boto3.client('sns').publish(
     Message=str(messageBody),
     TopicArn='arn:aws:sns:us-west-2:587838441384:testMessages'
 )

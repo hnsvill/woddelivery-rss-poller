@@ -3,3 +3,4 @@
 *package*
 *anothaone
 .secrets
+/tests/hellotest.py
